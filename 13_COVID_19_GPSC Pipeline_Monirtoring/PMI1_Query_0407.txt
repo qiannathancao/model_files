@@ -1,0 +1,41 @@
+Strategic Sourcing: Spent Module
+- connection to cognos data
+- classification dataset
+
+
+SELECT 
+	PDDCTO,
+	PDMCU,
+	PDSHAN,
+	Date( PDTRDJ, CYYDDD ) AS PDTRDJ,
+	Date( PDDRQJ, CYYDDD ) AS PDDRQJ,
+	PDLITM,
+	PDITM,
+	PDUOPN,
+	PDAOPN,
+	IMDSC1,
+	IMUOM1,
+	" IBORIG01" AS IBORIG01,
+                ABALPH,
+                ALADDS
+ 
+FROM 
+	PMI1.PRODDTA.F4311 F4311
+	LEFT OUTER JOIN PMI1.PRODDTA.F4101 F4101
+	ON 
+		F4311.PDITM = F4101.IMITM
+	LEFT OUTER JOIN PMI1.PRODDTA.F4102 F4102
+	ON 
+		F4311.PDMCU = F4102.IBMCU AND
+		F4311.PDLITM = F4102.IBLITM
+                LEFT OUTER JOIN PMI1.PRODDTA.F0101 F0101
+                ON 
+                               F4311.PDAN8 = F0101.ABAN8
+                LEFT OUTER JOIN PMI1.PRODDTA.F0116 F0116
+                ON 
+                               F4311.PDAN8 = F0116.ALAN8
+WHERE 
+	PDUOPN > 0
+	AND ( Date( PDDRQJ, CYYDDD ) > '1/1/2020'
+	AND Date( PDDRQJ, CYYDDD ) < '12/31/2020')
+	AND PDDCTO = 'OP' 
