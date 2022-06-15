@@ -1,6 +1,0 @@
-Note: PMI1 for pierece | OSK2 for Defense | OCG for Commercial
-Open Purchasing Order Focus:
-Segment: FEA
-Country: Mexico
-Application: PO Detail
-Tables: see Mark's JDE Data Source
